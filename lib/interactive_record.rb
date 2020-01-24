@@ -61,12 +61,11 @@ class InteractiveRecord
 
   def self.find_by(attribute)
     if attribute.is_a?(Hash) && self.column_names.include?("#{attribute.keys.first.to_s}")
-      binding.pry
       sql = <<-SQL
         SELECT * FROM #{table_name}
-        WHERE ? = ?
+        WHERE name = ?
       SQL
-      DB[:conn].execute(sql, attribute.keys.first.to_s, attribute.values.first)
+      DB[:conn].execute(sql, attribute.values.first)
     end
   end
 end
