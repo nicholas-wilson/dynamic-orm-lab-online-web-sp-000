@@ -63,7 +63,7 @@ class InteractiveRecord
     if attribute.is_a?(Hash) && self.column_names.include?("#{attribute.keys.first.to_s}")
       sql = <<-SQL
         SELECT * FROM #{table_name}
-        WHERE name = ?
+        WHERE #{attribute.keys.first.to_s} = ?
       SQL
       DB[:conn].execute(sql, attribute.values.first)
     end
